@@ -61,7 +61,7 @@ class ApplicationBuilder implements ApplicationBuilderInterface
      */
     public function replaceParameters ($config, $parameters) {
         if (empty($parameters)) {
-            return $config;
+            throw new \Exception('There is no parameters.php file!');
         }
         if (is_array($config)) {
             return json_decode(Replacer::multipleReplace(json_encode($config), $parameters), true);

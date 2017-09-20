@@ -9,11 +9,11 @@
 namespace src\application\factory;
 
 /**
- * Interface ObjectCreator
+ * Interface ObjectFactory
  * @package src\application\factory
  * interface showing some object creator
  */
-interface ObjectCreator
+interface ObjectFactory
 {
     /**
      * @param $config

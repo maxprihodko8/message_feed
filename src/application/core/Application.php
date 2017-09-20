@@ -10,7 +10,9 @@ namespace src\application\core;
 
 
 use Exception;
+use Error;
 use src\application\builder\ApplicationBuilder;
+use src\application\request\RequestHandler;
 
 /**
  * Class Application
@@ -52,7 +54,7 @@ class Application implements ApplicationState
              */
             $builder->build($config['app']);
             self::$container = $builder->createContainer($config);
-        } catch (Exception $exception) {
+        } catch (Exception | Error $exception) {
             $this->exceptionHandle($exception);
         }
     }
@@ -65,7 +67,7 @@ class Application implements ApplicationState
     {
         try {
             $this->state = self::STATE_REQUEST_HANDLE;
-        } catch (Exception $exception) {
+        } catch (Exception | Error $exception) {
             $this->exceptionHandle($exception);
         }
     }
@@ -76,8 +78,9 @@ class Application implements ApplicationState
     public function createResponse()
     {
         try {
+            var_dump(self::$container->auth->get(25));
             $this->state = self::STATE_RESPONSE_CREATE;
-        } catch (Exception $exception) {
+        } catch (Exception | Error $exception) {
             $this->exceptionHandle($exception);
         }
     }
@@ -89,16 +92,16 @@ class Application implements ApplicationState
     {
         try {
             $this->state = self::STATE_END;
-        } catch (Exception $exception) {
+        } catch (Exception | Error $exception) {
             $this->exceptionHandle($exception);
         }
     }
 
     /**
-     * @param Exception $exception exception (not error, only exception)
+     * @param Exception $exception | Error exception (not error, only exception)
      * Makes some good work showing message against just dieing and log
      */
-    private function exceptionHandle(Exception $exception) {
+    private function exceptionHandle($exception) {
         echo "There is an Exception with message " . $exception->getMessage() . ' ' . $exception->getTrace();
         $this->sendResponse();
     }

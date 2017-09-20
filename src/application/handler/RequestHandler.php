@@ -15,5 +15,8 @@ namespace src\application\request;
  */
 class RequestHandler
 {
+    public static function parseRequest() {
+
+    }
 
 }

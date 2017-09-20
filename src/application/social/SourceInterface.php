@@ -16,5 +16,6 @@ namespace src\application\social;
  */
 interface SourceInterface
 {
-    public static function get ($limit = 25);
+
+    public function get ($limit = 25);
 }

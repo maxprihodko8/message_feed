@@ -9,6 +9,11 @@
 namespace src\application\component;
 
 
+/**
+ * Interface Component
+ * @package src\application\component
+ * interface component showing some system components
+ */
 interface Component
 {
 

@@ -9,6 +9,11 @@
 namespace src\application\component;
 
 
+/**
+ * Class BaseComponent
+ * @package src\application\component
+ * just base component
+ */
 class BaseComponent implements Component
 {
 }

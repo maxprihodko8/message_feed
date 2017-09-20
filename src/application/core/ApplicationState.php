@@ -9,6 +9,11 @@
 namespace src\application\core;
 
 
+/**
+ * Interface ApplicationState
+ * @package src\application\core
+ * variable application states
+ */
 interface ApplicationState
 {
     const STATE_INIT = 1;

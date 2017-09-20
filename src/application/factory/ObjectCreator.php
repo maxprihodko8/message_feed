@@ -8,9 +8,18 @@
 
 namespace src\application\factory;
 
-
+/**
+ * Interface ObjectCreator
+ * @package src\application\factory
+ * interface showing some object creator
+ */
 interface ObjectCreator
 {
+    /**
+     * @param $config
+     * @return mixed
+     * creates an object
+     */
     public function createObject($config);
 
 }

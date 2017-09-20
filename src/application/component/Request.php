@@ -8,7 +8,11 @@
 
 namespace src\application\component;
 
-
+/**
+ * Class Request
+ * @package src\application\component
+ * class related to request
+ */
 class Request extends BaseComponent
 {
 

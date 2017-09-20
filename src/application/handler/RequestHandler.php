@@ -8,7 +8,11 @@
 
 namespace src\application\request;
 
-
+/**
+ * Class RequestHandler
+ * @package src\application\request
+ * handler of request
+ */
 class RequestHandler
 {
 

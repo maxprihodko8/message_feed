@@ -8,15 +8,26 @@
 
 namespace src\application\validator;
 
-
+/**
+ * Class ConfigValidator
+ * @package src\application\validator
+ * validator of config
+ */
 class ConfigValidator implements Validator
 {
     protected $object;
 
     protected $requiredFields = ['feed_limit'];
 
-    public function validate()
+    /**
+     * validates config
+     * @throws \InvalidArgumentException
+     */
+    public function validate(): void
     {
+        if (empty($this->object)) {
+            throw new \InvalidArgumentException('There is empty file config.php which is needed!');
+        }
         if (!is_array($this->object)) {
             throw new \InvalidArgumentException(
                 'Sorry, but you missed some of required fields from the list '.
@@ -28,6 +39,13 @@ class ConfigValidator implements Validator
 
     }
 
+    /**
+     * @param $object
+     * @param $field
+     *
+     * @throws \InvalidArgumentException
+     * validate attributes in required fields
+     */
     private function validateAttributes($object, $field)
     {
         foreach ($this->requiredFields as $key => $field) {

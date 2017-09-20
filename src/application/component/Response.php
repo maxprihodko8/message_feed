@@ -9,6 +9,11 @@
 namespace src\application\component;
 
 
+/**
+ * Class Response
+ * @package src\application\component
+ * response class
+ */
 class Response
 {
 

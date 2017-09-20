@@ -12,9 +12,19 @@ use src\application\di\Container;
 use src\application\factory\SocialConnectionObjectCreator;
 use src\application\validator\SocialConnectionConfigValidator;
 
+/**
+ * Class ContainerBuilder
+ * @package src\application\builder
+ * implementation of builder Interface which create container and insert auth module in it
+ */
 class ContainerBuilder implements BuilderInterface
 {
 
+    /**
+     * @param $config
+     * @return Container
+     * method related to creation of container
+     */
     public function build($config)
     {
         $container = new Container();
@@ -26,11 +36,9 @@ class ContainerBuilder implements BuilderInterface
             $auth = $config['social']['credentials'][$config['app']['use_auth']];
             if (!empty($auth)) {
                 $socialObjectCreator = new SocialConnectionObjectCreator();
+
                 $container->auth = $socialObjectCreator->createObject($auth);
-
-
             }
-
         }
         return $container;
     }

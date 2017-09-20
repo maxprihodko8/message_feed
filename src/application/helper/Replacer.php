@@ -11,6 +11,11 @@ namespace src\application\helper;
 
 use Exception;
 
+/**
+ * Class Replacer
+ * @package src\application\helper
+ * useful service related to replacing values in string
+ */
 class Replacer
 {
     public static function replaceWith($string, $from, $to) {

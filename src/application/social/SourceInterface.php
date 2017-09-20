@@ -9,6 +9,11 @@
 namespace src\application\social;
 
 
+/**
+ * Interface SourceInterface
+ * @package src\application\social
+ * source interface to implement in user models
+ */
 interface SourceInterface
 {
     public static function get ($limit = 25);

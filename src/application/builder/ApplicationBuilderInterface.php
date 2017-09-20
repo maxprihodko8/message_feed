@@ -8,6 +8,11 @@
 
 namespace src\application\builder;
 
+/**
+ * Interface ApplicationBuilderInterface
+ * @package src\application\builder
+ * interface of application builder if there is not than one, just for mark class
+ */
 interface ApplicationBuilderInterface extends BuilderInterface
 {
 

@@ -10,5 +10,5 @@ namespace src\application\builder;
 
 interface BuilderInterface
 {
-    public function build();
+    public function build($config);
 }

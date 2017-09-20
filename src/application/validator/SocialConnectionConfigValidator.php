@@ -1,0 +1,16 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: pn-user30
+ * Date: 20.09.17
+ * Time: 17:30
+ */
+
+namespace src\application\validator;
+
+
+class SocialConnectionConfigValidator extends ConfigValidator
+{
+    protected $requiredFields = ['class'];
+
+}

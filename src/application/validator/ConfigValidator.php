@@ -11,9 +11,9 @@ namespace src\application\validator;
 
 class ConfigValidator implements Validator
 {
-    private $object;
+    protected $object;
 
-    private $requiredFields = ['feed_limit'];
+    protected $requiredFields = ['feed_limit'];
 
     public function validate()
     {

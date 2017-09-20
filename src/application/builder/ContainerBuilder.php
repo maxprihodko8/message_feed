@@ -9,6 +9,8 @@
 namespace src\application\builder;
 
 use src\application\di\Container;
+use src\application\factory\SocialConnectionObjectCreator;
+use src\application\validator\SocialConnectionConfigValidator;
 
 class ContainerBuilder implements BuilderInterface
 {
@@ -23,7 +25,10 @@ class ContainerBuilder implements BuilderInterface
             $authName = $config['app']['use_auth'];
             $auth = $config['social']['credentials'][$config['app']['use_auth']];
             if (!empty($auth)) {
-                $container->auth = $auth;
+                $socialObjectCreator = new SocialConnectionObjectCreator();
+                $container->auth = $socialObjectCreator->createObject($auth);
+
+
             }
 
         }

@@ -15,7 +15,7 @@ class ApplicationBuilder implements ApplicationBuilderInterface
 {
     private $application;
 
-    public function build($config)
+    public function build ($config)
     {
         if (empty($this->application)) {
             throw new \InvalidArgumentException('Application instance is not found here');
@@ -29,7 +29,7 @@ class ApplicationBuilder implements ApplicationBuilderInterface
 
     public function setContainer ($config) {
         $containerBuilder = new ContainerBuilder();
-        $containerBuilder->build($config);
+        return $containerBuilder->build($config);
     }
 
     public function replaceParameters ($config, $parameters) {

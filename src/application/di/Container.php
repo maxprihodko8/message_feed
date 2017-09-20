@@ -10,16 +10,34 @@ namespace src\application\di;
 
 class Container
 {
-    private $singletons = [];
-    private $parameters = [];
+    private $instances = [];
+    public $parameterContainer;
+
+    public function __construct()
+    {
+        $this->parameterContainer = new ParameterContainer();
+    }
 
     public function __get($name)
     {
-        // TODO: Implement __get() method.
+        if (!empty($this->instances[$name])) {
+            return $this->instances[$name];
+        }
+        throw new \InvalidArgumentException('Instance ' . $name . ' is not found in container');
     }
 
     public function __set($name, $value)
     {
-        // TODO: Implement __set() method.
+        $this->instances[$name] = $value;
+    }
+
+    public function setParameter($name, $value)
+    {
+        $this->parameterContainer->set($name, $value);
+    }
+
+    public function getParameter($name)
+    {
+        $this->parameterContainer->get($name);
     }
 }

@@ -18,18 +18,21 @@ class ConfigValidator implements Validator
     public function validate()
     {
         if (!is_array($this->object)) {
-            throw new \InvalidArgumentException('Sorry, but you missed some of required fields from the list ' .
-            implode($this->requiredFields, ', '));
+            throw new \InvalidArgumentException(
+                'Sorry, but you missed some of required fields from the list '.
+                implode($this->requiredFields, ', ')
+            );
         }
 
         $this->validateAttributes($this->object, $this->requiredFields);
 
     }
 
-    private function validateAttributes($object, $field) {
+    private function validateAttributes($object, $field)
+    {
         foreach ($this->requiredFields as $key => $field) {
             if (empty($this->object[$field])) {
-                throw new \InvalidArgumentException('You missed field in config.php file - ' . $field);
+                throw new \InvalidArgumentException('You missed field in config.php file - '.$field);
             }
         }
     }

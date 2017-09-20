@@ -15,7 +15,6 @@ class Replacer
 {
     public static function replaceWith($string, $from, $to) {
         try {
-
             return str_replace($from, $to, $string);
         } catch (Exception $exception) {}
         return $string;

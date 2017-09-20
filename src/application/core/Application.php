@@ -13,7 +13,7 @@ use src\application\builder\ApplicationBuilder;
 
 class Application implements ApplicationState
 {
-    private $container;
+    public static $container;
 
     private $state;
 
@@ -24,21 +24,23 @@ class Application implements ApplicationState
         $builder->setApplication($this);
         $config = $builder->replaceParameters($config, $parameters);
 
-
-        $builder->build($config['app']);
-        $builder->setContainer($config['app']);
+        $builder->build($config['app'] ?? []);
+        self::$container = $builder->setContainer($config);
     }
 
 
-    public function handleRequest () {
+    public function handleRequest()
+    {
         $this->state = self::STATE_REQUEST_HANDLE;
     }
 
-    public function createResponse () {
+    public function createResponse()
+    {
         $this->state = self::STATE_RESPONSE_CREATE;
     }
 
-    public function sendResponse() {
+    public function sendResponse()
+    {
         $this->state = self::STATE_END;
     }
 }

@@ -1,4 +1,4 @@
 /vendor
 .git
 .idea
-config/parameters.php
+app/config/parameters.php

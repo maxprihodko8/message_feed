@@ -9,5 +9,15 @@
     ],
     "minimum-stability": "stable",
     "require": {
+        "abraham/twitteroauth": "^0.7.4"
+    },
+    "autoload": {
+        "files": [
+
+        ],
+        "psr-4": {
+            "app\\": "app/",
+            "src\\": "src/"
+        }
     }
 }

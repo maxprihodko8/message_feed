@@ -11,8 +11,8 @@ namespace src\application\builder;
 
 class ApplicationBuilder implements ApplicationBuilderInterface
 {
-
     public function build()
     {
+
     }
 }

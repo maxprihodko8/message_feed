@@ -8,6 +8,5 @@ $application = new Application($config);
 
 $application->init();
 $application->handleRequest();
-$response = $application->createResponse();
-
-return $response;
+$application->createResponse();
+$application->sendResponse();

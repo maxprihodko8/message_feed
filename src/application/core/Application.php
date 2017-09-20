@@ -11,7 +11,7 @@ namespace src\application\core;
 
 use src\application\builder\ApplicationBuilder;
 
-class Application
+class Application implements ApplicationState
 {
     private $container;
 
@@ -33,5 +33,9 @@ class Application
     }
 
     public function createResponse () {
+    }
+
+    public function sendResponse() {
+
     }
 }

@@ -8,7 +8,11 @@
 
 namespace src\feed\component\message;
 
-
+/**
+ * Interface Message
+ * @package src\feed\component\message
+ * POPO message object
+ */
 interface Message extends \JsonSerializable
 {
     public function __construct($attributes);

@@ -9,6 +9,11 @@
 namespace src\feed\component\message;
 
 
+/**
+ * Class TwitterMessage
+ * @package src\feed\component\message
+ * twitter implementation of message interface
+ */
 class TwitterMessage implements Message
 {
     private $id;
@@ -59,6 +64,10 @@ class TwitterMessage implements Message
         $this->id = $id;
     }
 
+    /**
+     * @param $attributes
+     * set all attributes according to list of attributes
+     */
     public function setAttributes($attributes)
     {
         foreach ($attributes as $key => $value) {
@@ -71,6 +80,10 @@ class TwitterMessage implements Message
         }
     }
 
+    /**
+     * @return array list of variable names
+     * JsonSerializable helps to serialize objects, without this json_encode wont work unless using another encoder
+     */
     public function jsonSerialize()
     {
         return get_object_vars($this);

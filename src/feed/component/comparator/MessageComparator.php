@@ -11,6 +11,11 @@ namespace src\feed\component\comparator;
 
 use src\feed\component\message\Message;
 
+/**
+ * Interface MessageComparator
+ * @package src\feed\component\comparator
+ * message comparator
+ */
 interface MessageComparator
 {
     public function __invoke(Message $message1, Message $message2);

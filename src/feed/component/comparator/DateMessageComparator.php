@@ -11,6 +11,11 @@ namespace src\feed\component\comparator;
 
 use src\feed\component\message\Message;
 
+/**
+ * Class DateMessageComparator
+ * @package src\feed\component\comparator
+ * data comparator
+ */
 class DateMessageComparator implements MessageComparator
 {
 

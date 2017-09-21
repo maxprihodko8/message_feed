@@ -11,6 +11,11 @@ namespace src\feed\component\comparator;
 
 use src\feed\component\message\Message;
 
+/**
+ * Class IdMessageComparator
+ * @package src\feed\component\comparator
+ * id message comparator
+ */
 class IdMessageComparator implements MessageComparator
 {
 

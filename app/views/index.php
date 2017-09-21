@@ -8,7 +8,7 @@
 
 <body>
 
-<div ng-app="MessageFeed" ng-controller="MessageFeedController">
+<div ng-app="MessageFeed" ng-controller="MessageFeedController" class="ng-cloak">
     <ul ng-repeat="message in messages">
         <li>
             {{message.id}}

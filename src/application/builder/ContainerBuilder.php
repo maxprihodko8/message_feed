@@ -10,7 +10,6 @@ namespace src\application\builder;
 
 use src\application\di\Container;
 use src\application\factory\SocialConnectionObjectFactory;
-use src\application\validator\SocialConnectionConfigValidator;
 
 /**
  * Class ContainerBuilder
@@ -19,6 +18,12 @@ use src\application\validator\SocialConnectionConfigValidator;
  */
 class ContainerBuilder implements BuilderInterface
 {
+    private $container;
+
+    public function __construct(Container $container = null)
+    {
+        $this->container = $container;
+    }
 
     /**
      * @param $config
@@ -27,19 +32,17 @@ class ContainerBuilder implements BuilderInterface
      */
     public function build($config)
     {
-        $container = new Container();
-        if (!empty($config['feed_limit'])) {
-            $container->setParameter('feed_limit', $config['feed_limit']);
+        if (empty($this->container)) {
+            $this->container = new Container();
         }
-        if (!empty($config['app']['use_auth'])) {
-            $authName = $config['app']['use_auth'];
-            $auth = $config['social']['credentials'][$config['app']['use_auth']];
-            if (!empty($auth)) {
-                $socialObjectCreator = new SocialConnectionObjectFactory();
+        foreach ($config as $key => $value) {
 
-                $container->auth = $socialObjectCreator->createObject($auth);
+            if ($key === 'auth') {
+                $socialObjectCreator = new SocialConnectionObjectFactory();
+                $this->container->auth = $socialObjectCreator->createObject($value);
             }
         }
-        return $container;
+
+        return $this->container;
     }
 }

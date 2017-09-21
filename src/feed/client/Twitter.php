@@ -10,18 +10,29 @@ namespace src\feed\client;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use src\application\social\SourceInterface;
 
+/**
+ * Class Twitter
+ * @package src\feed\client
+ * implementation of source interface - twitter one
+ */
 class Twitter implements SourceInterface
 {
+    /**
+     * @var $oauth mixed connection and implementation with libraries
+     */
     private $oauth;
 
-
+    /**
+     * @param int $limit
+     * get last tweets with limit
+     */
     public function get($limit = 25)
     {
-        //@TODO implement
     }
 
     /**
      * @return mixed
+     * getter for oauth
      */
     public function getOauth()
     {
@@ -30,6 +41,7 @@ class Twitter implements SourceInterface
 
     /**
      * @param mixed $oauth
+     * setter for oauth
      */
     public function setOauth($oauth)
     {

@@ -9,6 +9,8 @@
 namespace src\application\builder;
 
 use src\application\core\Application;
+use src\application\handler\initial\ContainerInitialHandler;
+use src\application\handler\initial\ParameterInitialHandlerCrawl;
 use src\application\helper\Replacer;
 use src\application\validator\ConfigValidator;
 
@@ -28,7 +30,7 @@ class ApplicationBuilder implements ApplicationBuilderInterface
      * @param $config array
      * function account for initial build of application - config check + check whether or not application instance is here
      */
-    public function build ($config)
+    public function build($config)
     {
         if (empty($this->application)) {
             throw new \InvalidArgumentException('Application instance is not found here');
@@ -48,9 +50,16 @@ class ApplicationBuilder implements ApplicationBuilderInterface
      * @return \src\application\di\Container
      * creates builder for container and gives it configuration to begin with
      */
-    public function createContainer ($config) {
+    public function createContainer($config)
+    {
         $containerBuilder = new ContainerBuilder();
-        return $containerBuilder->build($config);
+        $containerInitialHandler = new ContainerInitialHandler();
+        $container = $containerBuilder->build($containerInitialHandler->getConfigAdaptedForBuilder($config));
+
+        $parametersContainerBuilder = new ParametersContainerBuilder($container);
+        $parameterInitialHandlerCrawler = new ParameterInitialHandlerCrawl();
+        $parametersContainerBuilder->build($parameterInitialHandlerCrawler->getConfigAdaptedForBuilder($config));
+        return $container;
     }
 
     /**
@@ -59,7 +68,8 @@ class ApplicationBuilder implements ApplicationBuilderInterface
      * @return mixed
      * replaces config parameters with file which does not holds in git
      */
-    public function replaceParameters ($config, $parameters) {
+    public function replaceParameters($config, $parameters)
+    {
         if (empty($parameters)) {
             throw new \Exception('There is no parameters.php file!');
         }

@@ -9,9 +9,8 @@ namespace src\feed\client;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 use src\application\social\SourceInterface;
-use src\feed\component\comparator\DateMessageComparator;
+use src\feed\component\adapter\TwitterMessageAdapter;
 use src\feed\component\comparator\IdMessageComparator;
-use src\feed\component\message\TwitterMessage;
 
 /**
  * Class Twitter
@@ -25,11 +24,12 @@ class Twitter implements SourceInterface
      */
     private $oauth;
 
+
     /**
      * @param int $limit
-     * get last tweets with limit
-     * @param int $since
-     * @return array
+     * @param int $since_id
+     * @return array messages
+     * get messages from api of twitter, then adapt to application messages and returns message list
      */
     public function get($limit = 25, $since_id = 0)
     {
@@ -40,15 +40,8 @@ class Twitter implements SourceInterface
             $parameters['since_id'] = $since_id;
         }
         $messagesFromApi = $this->oauth->get('/statuses/user_timeline', $parameters);
-        $messages = [];
-        foreach ($messagesFromApi as $twitterMessage) {
-            if (!empty($twitterMessage->id) && !empty($twitterMessage->text) && !empty($twitterMessage->created_at))
-            $messages[] = new TwitterMessage([
-                'id' => $twitterMessage->id,
-                'text' => $twitterMessage->text,
-                'date' => $twitterMessage->created_at,
-            ]);
-        }
+        $messageAdapter = new TwitterMessageAdapter();
+        $messages = $messageAdapter->adapt($messagesFromApi);
 
         usort($messages, new IdMessageComparator());
         return array_reverse($messages);

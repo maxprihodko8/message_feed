@@ -1,0 +1,5 @@
+.ng-scope {font-family: "Calibri"; width:500px; margin:5px auto;padding:0;}
+.ng-scope li { list-style-type:none; margin:5px 0;}
+.ng-scope li:first-child {font-weight:bold; font-size:20px;}
+.ng-scope li:nth-child(2) {margin:5px 0 10px 0;}
+.ng-scope li:last-child {border-bottom:1px solid #000;}

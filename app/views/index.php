@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Message feed application</title>
+    <link rel="stylesheet" href="/web/css/style.css">
 </head>
 
 <body>
@@ -20,6 +21,7 @@
         </li>
     </ul>
 </div>
+
 </body>
 
 <!--  scripts  -->

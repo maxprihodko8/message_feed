@@ -90,12 +90,12 @@ class Application implements ApplicationState
             if (empty($url) || $url === '/') {
                 $responseHandler->setBody(file_get_contents(__DIR__.'/../../../app/views/index.php'));
             } else if (preg_match('/\/messages\/since_id=\d{1,}/', $url)) {
-                $responseHandler->setBody('');
+                preg_match('/(?!since_id=)\d{1,}/', $url, $value);
+                $responseHandler->setBody(['messages' => self::$container->auth->get(25, $value)]);
             } else if ($url === '/messages') {
-                $responseHandler->setBody(self::$container->auth->get(25));
+                $responseHandler->setBody(['messages' => self::$container->auth->get(25)]);
             }
             else {
-                var_dump($url);
                 $responseHandler->setBody(null);
             }
             self::$container->responseHandler = $responseHandler;

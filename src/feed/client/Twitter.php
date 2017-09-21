@@ -42,9 +42,10 @@ class Twitter implements SourceInterface
         $messagesFromApi = $this->oauth->get('/statuses/user_timeline', $parameters);
         $messages = [];
         foreach ($messagesFromApi as $twitterMessage) {
+            if (!empty($twitterMessage->id) && !empty($twitterMessage->text) && !empty($twitterMessage->created_at))
             $messages[] = new TwitterMessage([
-                'id' => $twitterMessage->id ?? '',
-                'text' => $twitterMessage->text ?? '',
+                'id' => $twitterMessage->id,
+                'text' => $twitterMessage->text,
                 'date' => $twitterMessage->created_at,
             ]);
         }

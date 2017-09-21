@@ -26,11 +26,13 @@ class Twitter implements SourceInterface
     /**
      * @param int $limit
      * get last tweets with limit
+     * @return array
      */
     public function get($limit = 25)
     {
         $messagesFromApi = $this->oauth->get('/statuses/user_timeline', [
             'count' => $limit,
+            //'since_id' =>
         ]);
         $messages = [];
         foreach ($messagesFromApi as $twitterMessage) {
@@ -42,6 +44,7 @@ class Twitter implements SourceInterface
         }
         return $messages;
     }
+
 
     /**
      * @return mixed
@@ -60,5 +63,4 @@ class Twitter implements SourceInterface
     {
         $this->oauth = $oauth;
     }
-
 }

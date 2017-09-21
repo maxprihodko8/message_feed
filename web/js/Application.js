@@ -11,7 +11,6 @@ function MessageFeedController($scope, $http) {
             url: '/messages',
             headers: {
                 'Content-type': 'application/json',
-                //'X-CSRF-Token': $('meta[name=csrf-token]').attr('content'),
                 'Access-Control-Allow-Origin': '*'
             }
         }).then(function successCallback(response) {
@@ -19,15 +18,6 @@ function MessageFeedController($scope, $http) {
                 $scope.messages = response.data;
             }
         }, function errorCallback(response) {
-            if (response !== null) {
-                if (response.status === 503) {
-                    alert("Ошибка при запросе данных с сервера");
-                } else if (response.status === 404) {
-                    alert("Нет такого маршрута");
-                } else {
-                    alert("Неизвестная ошибка");
-                }
-            }
         });
     }
     getAllMessages();

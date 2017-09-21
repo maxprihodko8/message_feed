@@ -89,9 +89,12 @@ class Application implements ApplicationState
             $url = Application::$container->request->getUrl();
             if (empty($url) || $url === '/') {
                 $responseHandler->setBody(file_get_contents(__DIR__.'/../../../app/views/index.php'));
+            } else if (preg_match('/\/messages\/since_id=\d{1,}/', $url)) {
+                $responseHandler->setBody('');
             } else if ($url === '/messages') {
                 $responseHandler->setBody(self::$container->auth->get(25));
-            } else {
+            }
+            else {
                 $responseHandler->setBody('empty');
             }
             self::$container->responseHandler = $responseHandler;

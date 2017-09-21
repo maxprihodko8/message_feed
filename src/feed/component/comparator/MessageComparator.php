@@ -9,7 +9,9 @@
 namespace src\feed\component\comparator;
 
 
+use src\feed\component\message\Message;
+
 interface MessageComparator
 {
-    public function compare($date1, $date2);
+    public function __invoke(Message $message1, Message $message2);
 }

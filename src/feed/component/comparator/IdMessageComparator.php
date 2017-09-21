@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: pn-user30
+ * User: maxprihodko8
  * Date: 21.09.17
- * Time: 17:47
+ * Time: 20:24
  */
 
 namespace src\feed\component\comparator;
@@ -11,11 +11,11 @@ namespace src\feed\component\comparator;
 
 use src\feed\component\message\Message;
 
-class DateMessageComparator implements MessageComparator
+class IdMessageComparator implements MessageComparator
 {
 
     public function __invoke(Message $message1, Message $message2)
     {
-        return $message1->getDate() <=> $message2->getDate();
+        return $message1->getId() <=> $message2->getId();
     }
 }

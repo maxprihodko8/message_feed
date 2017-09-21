@@ -95,7 +95,8 @@ class Application implements ApplicationState
                 $responseHandler->setBody(self::$container->auth->get(25));
             }
             else {
-                $responseHandler->setBody('empty');
+                var_dump($url);
+                $responseHandler->setBody(null);
             }
             self::$container->responseHandler = $responseHandler;
 

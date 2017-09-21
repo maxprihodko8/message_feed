@@ -9,6 +9,8 @@ namespace src\feed\client;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 use src\application\social\SourceInterface;
+use src\feed\component\comparator\DateMessageComparator;
+use src\feed\component\comparator\IdMessageComparator;
 use src\feed\component\message\TwitterMessage;
 
 /**
@@ -26,14 +28,18 @@ class Twitter implements SourceInterface
     /**
      * @param int $limit
      * get last tweets with limit
+     * @param int $since
      * @return array
      */
-    public function get($limit = 25)
+    public function get($limit = 25, $since_id = 0)
     {
-        $messagesFromApi = $this->oauth->get('/statuses/user_timeline', [
+        $parameters = [
             'count' => $limit,
-            //'since_id' =>
-        ]);
+        ];
+        if ($since_id !== 0) {
+            $parameters['since_id'] = $since_id;
+        }
+        $messagesFromApi = $this->oauth->get('/statuses/user_timeline', $parameters);
         $messages = [];
         foreach ($messagesFromApi as $twitterMessage) {
             $messages[] = new TwitterMessage([
@@ -42,7 +48,10 @@ class Twitter implements SourceInterface
                 'date' => $twitterMessage->created_at,
             ]);
         }
-        return $messages;
+
+        usort($messages, new IdMessageComparator());
+        return array_reverse($messages);
+
     }
 
 

@@ -15,5 +15,21 @@ namespace src\application\component;
  */
 class Request extends BaseComponent
 {
+    private $url;
 
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param mixed $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
 }

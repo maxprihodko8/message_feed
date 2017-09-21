@@ -6,7 +6,10 @@
  * Time: 14:33
  */
 
-namespace src\application\request;
+namespace src\application\handler;
+
+use src\application\component\Request;
+use src\application\core\Application;
 
 /**
  * Class RequestHandler
@@ -15,8 +18,12 @@ namespace src\application\request;
  */
 class RequestHandler
 {
-    public static function parseRequest() {
 
+    public function parseRequest() {
+        if (Application::$container->request === null) {
+            Application::$container->request = new Request();
+        }
+        Application::$container->request->setUrl($_SERVER['REQUEST_URI']);
     }
 
 }

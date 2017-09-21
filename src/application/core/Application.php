@@ -8,11 +8,11 @@
 
 namespace src\application\core;
 
-
 use Exception;
 use Error;
 use src\application\builder\ApplicationBuilder;
-use src\application\request\RequestHandler;
+use src\application\handler\RequestHandler;
+use src\application\handler\ResponseHandler;
 
 /**
  * Class Application
@@ -66,6 +66,9 @@ class Application implements ApplicationState
     public function handleRequest()
     {
         try {
+            $requestHandler = new RequestHandler();
+            $requestHandler->parseRequest();
+            self::$container->requestHandler = $requestHandler;
             $this->state = self::STATE_REQUEST_HANDLE;
         } catch (Exception | Error $exception) {
             $this->exceptionHandle($exception);
@@ -74,12 +77,23 @@ class Application implements ApplicationState
 
     /**
      * creation of response
+     * with simple control over it - if request with any letter after / - response will be another
      */
     public function createResponse()
     {
         try {
-            var_dump(self::$container->auth->get(25));
             $this->state = self::STATE_RESPONSE_CREATE;
+
+            $responseHandler = new ResponseHandler();
+            $responseHandler->createResponse();
+            $url = Application::$container->request->getUrl();
+            if (empty($url) || $url === '/') {
+                $responseHandler->setBody(file_get_contents(__DIR__.'/../../../app/views/index.php'));
+            } else {
+                $responseHandler->setBody('');
+            }
+            self::$container->responseHandler = $responseHandler;
+
         } catch (Exception | Error $exception) {
             $this->exceptionHandle($exception);
         }
@@ -92,6 +106,9 @@ class Application implements ApplicationState
     {
         try {
             $this->state = self::STATE_END;
+            /** @var ResponseHandler $responseHandler */
+            $responseHandler = self::$container->responseHandler;
+            $responseHandler->send();
         } catch (Exception | Error $exception) {
             $this->exceptionHandle($exception);
         }
@@ -101,8 +118,9 @@ class Application implements ApplicationState
      * @param Exception $exception | Error exception (not error, only exception)
      * Makes some good work showing message against just dieing and log
      */
-    private function exceptionHandle($exception) {
-        echo "There is an Exception with message " . $exception->getMessage() . ' ' . $exception->getTrace();
+    private function exceptionHandle($exception)
+    {
+        echo "There is an Exception with message ".$exception->getMessage().' '.$exception->getTrace();
         $this->sendResponse();
     }
 }

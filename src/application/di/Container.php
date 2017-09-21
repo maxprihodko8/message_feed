@@ -44,7 +44,8 @@ class Container
         if (!empty($this->instances[$name])) {
             return $this->instances[$name];
         }
-        throw new \InvalidArgumentException('Instance ' . $name . ' is not found in container');
+        return null;
+        //throw new \InvalidArgumentException('Instance ' . $name . ' is not found in container');
     }
 
     /**

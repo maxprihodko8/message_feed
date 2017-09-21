@@ -13,3 +13,4 @@ $application = new Application($config, $parameters);
 $application->handleRequest();
 $application->createResponse();
 $application->sendResponse();
+die();

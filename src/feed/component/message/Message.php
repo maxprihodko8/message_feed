@@ -9,7 +9,7 @@
 namespace src\feed\component\message;
 
 
-interface Message
+interface Message extends \JsonSerializable
 {
     public function __construct($attributes);
 

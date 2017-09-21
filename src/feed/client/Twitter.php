@@ -40,6 +40,7 @@ class Twitter implements SourceInterface
                 'date' => $twitterMessage->created_at,
             ]);
         }
+        return $messages;
     }
 
     /**

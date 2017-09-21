@@ -4,12 +4,27 @@
     <meta charset="UTF-8">
     <title>Message feed application</title>
 </head>
+
 <body>
 
+<div ng-app="MessageFeed" ng-controller="MessageFeedController">
+    <ul ng-repeat="message in messages">
+        <li>
+            {{message.id}}
+        </li>
+        <li>
+            {{message.text}}
+        </li>
+        <li>
+            {{message.date}}
+        </li>
+    </ul>
+</div>
 </body>
 
 <!--  scripts  -->
 <script src="/web/js/angular.min.js"></script>
+<script src="/web/js/Application.js"></script>
 <!-- /scripts  -->
 
 </html>

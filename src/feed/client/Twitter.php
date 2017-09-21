@@ -9,6 +9,7 @@ namespace src\feed\client;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 use src\application\social\SourceInterface;
+use src\feed\component\message\TwitterMessage;
 
 /**
  * Class Twitter
@@ -31,7 +32,14 @@ class Twitter implements SourceInterface
         $messagesFromApi = $this->oauth->get('/statuses/user_timeline', [
             'count' => $limit,
         ]);
-
+        $messages = [];
+        foreach ($messagesFromApi as $twitterMessage) {
+            $messages[] = new TwitterMessage([
+                'id' => $twitterMessage->id ?? '',
+                'text' => $twitterMessage->text ?? '',
+                'date' => $twitterMessage->created_at,
+            ]);
+        }
     }
 
     /**

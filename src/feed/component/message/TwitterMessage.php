@@ -11,16 +11,22 @@ namespace src\feed\component\message;
 
 class TwitterMessage implements Message
 {
+    private $id;
     private $text;
     private $date;
-    private $likes;
 
     const attributes_list = [
+        'id',
         'text',
         'date',
-        'likes',
     ];
 
+    public function __construct($attributes = null)
+    {
+        if (!empty($attributes)) {
+            $this->setAttributes($attributes);
+        }
+    }
 
     public function setText($text)
     {
@@ -42,26 +48,27 @@ class TwitterMessage implements Message
         return $this->date;
     }
 
-    public function setLikes($likes)
+
+    public function getId()
     {
-        $this->likes = $likes;
+        return $this->id;
     }
 
-    public function getLikes()
+    public function setId($id)
     {
-        return $this->likes;
+        $this->id = $id;
     }
-
 
     public function setAttributes($attributes)
     {
         foreach ($attributes as $key => $value) {
-            if (!empty(self::attributes_list[$key])) {
+            if (!empty(array_search($key, self::attributes_list))) {
                 $this->{'set' . $key}($value);
+            } else if ($key === 'id') {
+                $this->setId($value);
             }
+
         }
     }
-
-
 
 }

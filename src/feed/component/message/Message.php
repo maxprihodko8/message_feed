@@ -11,15 +11,16 @@ namespace src\feed\component\message;
 
 interface Message
 {
+    public function __construct($attributes);
+
+    public function getId();
+    public function setId($id);
 
     public function setText($text);
     public function getText();
 
     public function setDate($date);
     public function getDate();
-
-    public function setLikes($likes);
-    public function getLikes();
 
     public function setAttributes($attributes);
 }

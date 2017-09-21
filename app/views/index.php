@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Message feed application</title>
 </head>
 <body>
-Some text
+
 </body>
+
+<!--  scripts  -->
+<script src="/web/js/angular.min.js"></script>
+<!-- /scripts  -->
+
 </html>

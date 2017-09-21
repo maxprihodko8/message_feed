@@ -18,7 +18,7 @@ use src\application\social\SourceInterface;
 class Twitter implements SourceInterface
 {
     /**
-     * @var $oauth mixed connection and implementation with libraries
+     * @var $oauth TwitterOAuth connection and implementation with libraries
      */
     private $oauth;
 
@@ -28,6 +28,10 @@ class Twitter implements SourceInterface
      */
     public function get($limit = 25)
     {
+        $messagesFromApi = $this->oauth->get('/statuses/user_timeline', [
+            'count' => $limit,
+        ]);
+
     }
 
     /**

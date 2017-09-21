@@ -13,20 +13,55 @@ class TwitterMessage implements Message
 {
     private $text;
     private $date;
-    private $likeCount;
+    private $likes;
 
-    public function text()
+    const attributes_list = [
+        'text',
+        'date',
+        'likes',
+    ];
+
+
+    public function setText($text)
     {
-        // TODO: Implement text() method.
+        $this->text = $text;
     }
 
-    public function date()
+    public function getText()
     {
-        // TODO: Implement date() method.
+        return $this->text;
     }
 
-    public function likeCount()
+    public function setDate($date)
     {
-        // TODO: Implement likeCount() method.
+        $this->date = $date;
     }
+
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
+    }
+
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+
+    public function setAttributes($attributes)
+    {
+        foreach ($attributes as $key => $value) {
+            if (!empty(self::attributes_list[$key])) {
+                $this->{'set' . $key}($value);
+            }
+        }
+    }
+
+
+
 }

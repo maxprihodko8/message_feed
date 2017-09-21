@@ -20,6 +20,9 @@ class ResponseHandler
     }
 
     public function setBody($body) {
+        if (!is_string($body)) {
+            $body = json_encode($body);
+        }
         Application::$container->response->setBody($body);
     }
 

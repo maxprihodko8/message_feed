@@ -71,9 +71,10 @@ class Container
     /**
      * @param $name
      * gets value parameter list
+     * @return mixed
      */
-    public function getParameter($name): void
+    public function getParameter($name)
     {
-        $this->parameterContainer->get($name);
+        return $this->parameterContainer->get($name);
     }
 }

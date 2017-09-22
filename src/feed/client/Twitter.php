@@ -24,6 +24,7 @@ class Twitter implements SourceInterface
      * @var $oauth TwitterOAuth connection and implementation with libraries
      */
     private $oauth;
+    protected $parameters = [];
 
 
     /**
@@ -32,15 +33,11 @@ class Twitter implements SourceInterface
      * @return array messages
      * get messages from api of twitter, then adapt to application messages and returns message list
      */
-    public function get($limit = 25, $since_id = 0)
+    public function get($limit = 25)
     {
-        $parameters = [
-            'count' => $limit,
-        ];
-        if ($since_id !== 0) {
-            $parameters['since_id'] = $since_id;
-        }
-        $messagesFromApi = $this->oauth->get('/statuses/user_timeline', $parameters);
+        $this->parameters['count'] = $limit;
+
+        $messagesFromApi = $this->oauth->get('/statuses/user_timeline', $this->parameters);
 
         $validator = new TwitterValidator();
         $validator->validate($messagesFromApi);
@@ -69,5 +66,21 @@ class Twitter implements SourceInterface
     public function setOauth($oauth)
     {
         $this->oauth = $oauth;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @param mixed $parameters
+     */
+    public function setParameters($parameters)
+    {
+        $this->parameters = $parameters;
     }
 }

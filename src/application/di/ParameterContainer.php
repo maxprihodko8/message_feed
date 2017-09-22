@@ -37,7 +37,7 @@ class ParameterContainer
      * @return mixed
      * find parameter from list and if none is returns false
      */
-    public function get($name) : mixed
+    public function get($name)
     {
         return !empty($this->parameters[$name]) ? $this->parameters[$name] : false;
     }

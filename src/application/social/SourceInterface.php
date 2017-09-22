@@ -17,5 +17,5 @@ namespace src\application\social;
 interface SourceInterface
 {
 
-    public function get ($limit = 25, $since_id = 0);
+    public function get ($limit = 25);
 }

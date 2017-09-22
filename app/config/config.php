@@ -9,7 +9,7 @@ return [
         'credentials' => [
             'twitter' => [
                 'oauth' => 'Abraham\\TwitterOAuth\\TwitterOAuth',
-                'class' => '\\src\\feed\\client\\Twitter',
+                'class' => '\\src\\feed\\client\\TwitterClient',
                 'secret' => [
                     'twitter_key' => '%twitter_key%',
                     'twitter_secret' => '%twitter_secret%',

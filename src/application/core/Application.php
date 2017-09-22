@@ -91,7 +91,8 @@ class Application implements ApplicationState
                 $responseHandler->setBody(file_get_contents(__DIR__.'/../../../app/views/index.php'));
             } else if (preg_match('/\/messages\/since_id=\d{1,}/', $url)) {
                 preg_match('/(?!since_id=)\d{1,}/', $url, $value);
-                $responseHandler->setBody(['messages' => self::$container->auth->get(25, $value)]);
+                self::$container->setParameter('since_id', $value);
+                $responseHandler->setBody(['messages' => self::$container->auth->get(25)]);
             } else if ($url === '/messages') {
                 $responseHandler->setBody(['messages' => self::$container->auth->get(25)]);
             }

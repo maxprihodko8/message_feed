@@ -58,7 +58,7 @@ function MessageFeedController($scope, $http) {
 
     function callback() {
         getMessages();
-        setTimeout(callback, 1500);
+        setTimeout(callback, 1000);
     }
     callback();
 }

@@ -9,6 +9,9 @@
 <body>
 
 <div ng-app="MessageFeed" ng-controller="MessageFeedController" class="ng-cloak">
+    <span class="errors_field">
+        {{errors}}
+    </span>
     <ul ng-repeat="message in messages">
         <li>
             {{message.id}}

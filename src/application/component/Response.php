@@ -19,6 +19,11 @@ class Response
     private $header;
     private $body;
 
+    public function __construct()
+    {
+        $this->body = '';
+    }
+
     /**
      * @return mixed
      */

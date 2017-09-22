@@ -126,7 +126,11 @@ class Application implements ApplicationState
      */
     private function exceptionHandle($exception)
     {
-        echo "There is an Exception with message ".$exception->getMessage().' '.$exception->getTrace();
+        if (self::$container->responseHandler === null) {
+            self::$container->responseHandler = new ResponseHandler();
+        }
+        self::$container->responseHandler->setBody(['errors' => "There is an Exception with message ".$exception->getMessage()]);
         $this->sendResponse();
+        exit();
     }
 }

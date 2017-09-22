@@ -5,6 +5,7 @@ Application.controller('MessageFeedController', MessageFeedController);
 function MessageFeedController($scope, $http) {
     $scope.messages = {};
     $scope.lastMessageId = 0;
+    $scope.errors = '';
 
     function getMessages() {
         var url = '/messages';
@@ -21,10 +22,11 @@ function MessageFeedController($scope, $http) {
             }
         }).then(function successCallback(response) {
             if (response !== null && response.status === 200) {
+                $scope.errors = (response.data.errors !== null) ? response.data.errors : '';
                 if ($scope.lastMessageId === 0) {
                     $scope.messages = response.data.messages;
                 } else {
-                    if (response.data !== null && response.data.messages instanceof Array) {
+                    if (response.data.messages instanceof Array) {
                         var new_messages = response.data.messages;
                         insertAtArray(new_messages);
                     }
@@ -56,7 +58,7 @@ function MessageFeedController($scope, $http) {
 
     function callback() {
         getMessages();
-        setTimeout(callback, 700);
+        setTimeout(callback, 1500);
     }
     callback();
 }

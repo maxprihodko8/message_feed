@@ -10,6 +10,7 @@ namespace src\feed\client;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use src\application\social\SourceInterface;
 use src\feed\component\adapter\TwitterMessageAdapter;
+use src\feed\component\adapter\TwitterValidator;
 use src\feed\component\comparator\IdMessageComparator;
 
 /**
@@ -40,6 +41,10 @@ class Twitter implements SourceInterface
             $parameters['since_id'] = $since_id;
         }
         $messagesFromApi = $this->oauth->get('/statuses/user_timeline', $parameters);
+
+        $validator = new TwitterValidator();
+        $validator->validate($messagesFromApi);
+
         $messageAdapter = new TwitterMessageAdapter();
         $messages = $messageAdapter->adapt($messagesFromApi);
 
@@ -47,7 +52,6 @@ class Twitter implements SourceInterface
         return array_reverse($messages);
 
     }
-
 
     /**
      * @return mixed

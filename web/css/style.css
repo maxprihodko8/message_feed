@@ -3,6 +3,7 @@
 .ng-scope li:first-child {font-weight:bold; font-size:20px;}
 .ng-scope li:nth-child(2) {margin:5px 0 10px 0;}
 .ng-scope li:last-child {border-bottom:1px solid #000;}
+.errors_field {color: red; font-size: 20px;}
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
